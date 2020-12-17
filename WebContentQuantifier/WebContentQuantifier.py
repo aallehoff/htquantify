@@ -7,6 +7,8 @@ class WebContent():
         self.url = url
         self.__fetch_content()
         self.__parse_content()
+        self.__clean_content()
+        self.__load_content()
 
     
     # Send HTTP request and store response
@@ -28,9 +30,17 @@ class WebContent():
     def __parse_content(self):
         self.soup = BeautifulSoup(self.raw, 'html.parser')
         
+    def __clean_content(self):
         # Strip out CSS and JavaScript
-        for code in self.soup(["style, script"]):
+        for code in self.soup(['style', 'script']):
             code.decompose()
 
-        # Tokenize textual content
-        self.tokens = self.soup.findAll(text=True)
+    def __load_content(self):
+        # Load all elements into a list
+        self.tags = []
+        for element in self.soup.findAll():
+            self.tags.append(element.name)
+
+        # Load all text nodes into a list
+        self.text = self.soup.findAll(text=True)
+                
