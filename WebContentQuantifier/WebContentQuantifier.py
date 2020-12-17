@@ -43,4 +43,26 @@ class WebContent():
 
         # Load all text nodes into a list
         self.text = self.soup.findAll(text=True)
-                
+
+    def quantify(self):
+        quantities = {
+            'overall': {
+                'tags': 0,
+                'text': 0
+            },
+            'tags': {},
+            'text': {}
+        }
+
+        self.__counter('tags', self.tags, quantities)
+        self.__counter('text', self.text, quantities)
+
+        return quantities
+
+    def __counter(self, category, attribute, buffer):
+        for item in attribute:
+            buffer['overall'][category] += 1
+            try:
+                buffer[category][item] += 1
+            except KeyError:
+                buffer[category][item] = 1
