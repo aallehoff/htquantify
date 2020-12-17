@@ -1,4 +1,5 @@
 from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
 class WebContent():
     # Initialize object
@@ -19,4 +20,4 @@ class WebContent():
 
     # Parse content
     def __parse_content(self):
-        pass
+        self.soup = BeautifulSoup(self.raw, 'html.parser')
