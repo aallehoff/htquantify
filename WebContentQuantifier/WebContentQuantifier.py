@@ -15,6 +15,8 @@ class WebContent():
             # Store relevent information
             self.date = response.getheader('Date')
             self.type = response.getheader('Content-Type')
-            self.content = response.read()
+            self.raw = response.read()
 
     # Parse content
+    def __parse_content(self):
+        pass
