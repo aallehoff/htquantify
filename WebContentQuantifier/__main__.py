@@ -1,6 +1,8 @@
 import argparse
 from urllib.parse import urlparse
 
+import WebContentQuantifier
+
 # Parse command line arguments
 clarg_parser = argparse.ArgumentParser(description="Quantify the content located at a given URL.")
 clarg_parser.add_argument("url")
