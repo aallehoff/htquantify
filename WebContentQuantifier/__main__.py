@@ -4,8 +4,10 @@ from urllib.parse import urlparse
 import quantifier
 
 # Parse command line arguments
-clarg_parser = argparse.ArgumentParser(description="Quantify the content located at a given URL.")
+clarg_parser = argparse.ArgumentParser(description="Quantify the contents of a hypertext document from a URL.")
 clarg_parser.add_argument("url")
+clarg_parser.add_argument('-s', '--sort-by', dest='sort_by', choices=['quantity', 'token'], default='quantity')
+clarg_parser.add_argument('-i', '--include', dest='include', choices=['all', 'tags', 'text'], default='text')
 clargs = clarg_parser.parse_args()
 
 # Validate URL
