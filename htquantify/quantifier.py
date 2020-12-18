@@ -1,14 +1,18 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup # pylint: disable=import-error
+import re
 
 class Hypertext():
     # Initialize object
     def __init__(self, url):
         self.url = url
+
+        # Fetch, parse, clean, load, tokenize
         self.__fetch_content()
         self.__parse_content()
         self.__clean_content()
         self.__load_content()
+        self.__tokenize_text()
 
     
     # Send HTTP request and store response
@@ -43,6 +47,24 @@ class Hypertext():
 
         # Load all text nodes into a list
         self.text = self.soup.findAll(text=True)
+
+    def __tokenize_text(self):
+        # Naive whitespace and punctuation tokenizer
+        tokenizer = re.compile(r'[\s,.!?/;:"()[\]{}<>]+')
+
+        # Setup buffer
+        dirty = self.text
+        clean = []
+
+        # Tokenize
+        for item in dirty:
+            clean.extend(tokenizer.split(item))
+
+        # Remove empty strings from results
+        clean = [item for item in clean if item]
+
+        # Write results to object
+        self.text = clean
 
     def quantify(self):
         quantities = {
