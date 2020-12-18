@@ -1,7 +1,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup # pylint: disable=import-error
 
-class WebContent():
+class Hypertext():
     # Initialize object
     def __init__(self, url):
         self.url = url
