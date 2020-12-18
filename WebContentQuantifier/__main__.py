@@ -1,6 +1,9 @@
 import argparse
 from urllib.parse import urlparse
 
+from rich.console import Console # pylint: disable=import-error
+from rich.table import Table # pylint: disable=import-error
+
 import quantifier
 
 # Parse command line arguments
@@ -18,3 +21,15 @@ if not (parsed_url.scheme and parsed_url.netloc):
 # Instance Hypertext class
 hyper = quantifier.Hypertext(clargs.url)
 quants = hyper.quantify()
+
+# Display results
+results = Table(title=hyper.url, row_styles=['', 'grey50'])
+
+results.add_column('Quantity', justify='right')
+results.add_column('Token', justify='left')
+
+for k, v in quants.text_by_count.items(): # pylint: disable=no-member
+    results.add_row(str(k), ', '.join(v))
+
+console = Console()
+console.print(results)
