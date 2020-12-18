@@ -57,7 +57,7 @@ class Hypertext():
         self.__counter('tags', self.tags, quantities)
         self.__counter('text', self.text, quantities)
 
-        return quantities
+        return HypertextQuantifier(quantities)
 
     def __counter(self, category, attribute, buffer):
         for item in attribute:
@@ -67,9 +67,25 @@ class Hypertext():
             except KeyError:
                 buffer[category][item] = 1
 
+
 class HypertextQuantifier():
     def __init__(self, q):
-        pass
+        # Seperate overall stats from category stats
+        self.__overall = q.pop('overall')
+
+        # Extract list of categories
+        self.__cats = list(q.keys())
+
+        # Load categories directly into object
+        self.__dict__.update(q)
+
+        # Generate inverted categories
+        new_cats = []
+        for name in self.__cats:
+            new_cat = f'{name}_by_count'
+            self.__dict__[new_cat] = self.__invert_dictionary(self.__dict__[name])
+            new_cats.append(new_cat)
+        self.__cats.extend(new_cats)
 
     def __invert_dictionary(self, d):
         inversion = {}
@@ -78,7 +94,6 @@ class HypertextQuantifier():
         for key, value in d.items():
             
             # Convert old values into new keys that store lists of old keys
-            print(value)
             if value in inversion.keys():
                 # Append old key to new values
                 inversion[value].append(key)
@@ -87,3 +102,9 @@ class HypertextQuantifier():
                 inversion[value] = [key]
 
         return inversion
+
+    def get_categories(self):
+        return self.__cats
+    
+    def get_overall(self):
+        return self.__overall

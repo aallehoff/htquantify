@@ -15,3 +15,4 @@ if not (parsed_url.scheme and parsed_url.netloc):
 
 # Instance Hypertext class
 hyper = quantifier.Hypertext(clargs.url)
+quants = hyper.quantify()
