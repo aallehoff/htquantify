@@ -57,7 +57,7 @@ class Hypertext():
         self.__counter('tags', self.tags, quantities)
         self.__counter('text', self.text, quantities)
 
-        return HypertextQuantifier(quantities)
+        return HypertextQuantities(quantities)
 
     def __counter(self, category, attribute, buffer):
         for item in attribute:
@@ -68,7 +68,7 @@ class Hypertext():
                 buffer[category][item] = 1
 
 
-class HypertextQuantifier():
+class HypertextQuantities():
     def __init__(self, q):
         # Seperate overall stats from category stats
         self.__overall = q.pop('overall')
