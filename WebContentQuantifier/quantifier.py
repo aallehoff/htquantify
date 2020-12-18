@@ -66,3 +66,24 @@ class Hypertext():
                 buffer[category][item] += 1
             except KeyError:
                 buffer[category][item] = 1
+
+class HypertextQuantifier():
+    def __init__(self, q):
+        pass
+
+    def __invert_dictionary(self, d):
+        inversion = {}
+
+        # Loop through the items in the given dictionary
+        for key, value in d.items():
+            
+            # Convert old values into new keys that store lists of old keys
+            print(value)
+            if value in inversion.keys():
+                # Append old key to new values
+                inversion[value].append(key)
+            else:
+                # Set old value as new key
+                inversion[value] = [key]
+
+        return inversion
