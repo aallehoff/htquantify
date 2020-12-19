@@ -123,6 +123,10 @@ class HypertextQuantities():
                 # Set old value as new key
                 inversion[value] = [key]
 
+        # Sort tokens in list in place
+        for key, value in inversion.items():
+            value.sort()
+
         return inversion
 
     def get_categories(self):
