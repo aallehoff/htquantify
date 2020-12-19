@@ -1,6 +1,9 @@
-from urllib.request import urlopen
-from bs4 import BeautifulSoup # pylint: disable=import-error
 import re
+from urllib.request import urlopen
+
+from bs4 import BeautifulSoup # pylint: disable=import-error
+from rich.console import Console # pylint: disable=import-error
+from rich.table import Table # pylint: disable=import-error
 
 class Hypertext():
     # Initialize object
@@ -134,3 +137,43 @@ class HypertextQuantities():
     
     def get_overall(self):
         return self.__overall
+
+class Display():
+    def __init__(self, site, data, opts):
+        self.site = site
+        self.data = data
+        self.opts = opts
+    
+    def output(self):
+        # Create a table with striped rows
+        self.table = Table(title=self.site.url, row_styles=['', 'grey50'])
+
+        self.__build_columns()
+        self.__fill_rows()
+
+        console = Console()
+        console.print(self.table)
+
+    def __build_columns(self):
+        if self.opts.sort_by == 'quantity':
+            self.table.add_column('Quantity', justify='right')
+            self.table.add_column('Token', justify='left')
+        elif self.opts.sort_by == 'token':
+            self.table.add_column('Token', justify='right')
+            self.table.add_column('Quantity', justify='left')
+
+    def __fill_rows(self):
+        if self.opts.sort_by == 'quantity':
+            if self.opts.include == 'text':
+                for k, v in sorted(self.data.text_by_count.items(), reverse=True):
+                    self.table.add_row(str(k), ', '.join(v))
+            elif self.opts.include == 'tags':
+                for k, v in sorted(self.data.tags_by_count.items(), reverse=True):
+                    self.table.add_row(str(k), ', '.join(v))
+        elif self.opts.sort_by == 'token':
+            if self.opts.include == 'text':
+                for k, v in sorted(self.data.text.items()):
+                    self.table.add_row(k, str(v))
+            elif self.opts.include == 'tags':
+                for k, v in sorted(self.data.tags.items()):
+                    self.table.add_row(k, str(v))
