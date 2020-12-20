@@ -15,7 +15,7 @@ rich | PyPI Module | Needed to assemble tabular output. |
 2. Open your terminal or command line and navigate to a folder suitable for storing the project
 3. Clone this repository:   `git clone https://github.com/aallehoff/htquantify.git`
 4. Change directory into repo folder:  `cd htquantify`
-5. (optional) Create and initialize virtual environment:  `python3 -m venv venv/htquantify` and `source venv/htquantify/bin/`
+5. (_optional_) Create and initialize virtual environment:  `python3 -m venv venv/htquantify` and `source venv/htquantify/bin/`
 6. Install PyPI module dependencies:  `pip install -r requirements.txt`
 7. Run project:  `python htquantify --help`
 
