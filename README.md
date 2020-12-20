@@ -10,6 +10,7 @@ htquantify is a CLI program that takes a URL, navigates to a site, scrapes and t
 ## Dependencies
 Name | Type | Reason | Note
 ---- | ---- | ------ | ----
+git | Source Control | Needed to acquire project files. |
 python3 | Interpreter | Needed to execute '.py' files. | Developed for version 3.8 and up.
 bs4 | PyPI Module | Needed to parse HTML files. |
 rich | PyPI Module | Needed to assemble tabular output. |
