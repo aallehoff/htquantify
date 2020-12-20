@@ -4,8 +4,8 @@ Code Louisville @ BU: Python
 htquantify is a CLI program that takes a URL, navigates to a site, scrapes and tokenizes its content, counts the tokens, and produces a tabular display of the results. Users may choose to display data about text nodes or HTML elements, and sort results numerically by quantity or alphabetically by token. Requires a connection to the Internet to be used.
 
 ## Examples
-![Example Help Dialog](./help.png)
-![Example Output](./example.png)
+![Example Help Dialog](./help.PNG)
+![Example Output](./example.PNG)
 
 ## Dependencies
 Name | Type | Reason | Note
