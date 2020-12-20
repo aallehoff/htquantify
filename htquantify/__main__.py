@@ -6,10 +6,10 @@ import quantifier
 
 # Parse command line arguments
 clarg_parser = argparse.ArgumentParser(description="Quantify the contents of a hypertext document from a URL.")
-clarg_parser.add_argument("url", help='Must include protocol, and address')
-clarg_parser.add_argument('--debug', action='store_true')
-clarg_parser.add_argument('-s', '--sort-by', dest='sort_by', choices=['quantity', 'token'], default='quantity')
-clarg_parser.add_argument('-i', '--include', dest='include', choices=['tags', 'text'], default='text')
+clarg_parser.add_argument("url", help='a Uniform Resource Locator (URL) with prefix')
+clarg_parser.add_argument('--debug', action='store_true', help="enable debug mode")
+clarg_parser.add_argument('-s', '--sort-by', dest='sort_by', choices=['quantity', 'token'], default='quantity', help='choose sorting mode')
+clarg_parser.add_argument('-i', '--include', dest='include', choices=['tags', 'text'], default='text', help='choose portion of content to quantify')
 clargs = clarg_parser.parse_args()
 
 # Set debug level
